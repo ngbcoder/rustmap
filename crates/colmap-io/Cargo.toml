@@ -1,0 +1,21 @@
+[package]
+name = "colmap-io"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+description = "COLMAP-compatible database and model I/O for colmap-rs"
+
+[dependencies]
+colmap-core = { path = "../colmap-core" }
+nalgebra = { workspace = true }
+rusqlite = { workspace = true }
+serde = { workspace = true }
+byteorder = { workspace = true }
+bytemuck = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+tempfile = "3"

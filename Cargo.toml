@@ -1,0 +1,35 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/colmap-core",
+    "crates/colmap-io",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+license = "BSD-3-Clause"
+authors = ["colmap-rs contributors"]
+repository = "https://github.com/ngbcoder/rustmap"
+
+[workspace.dependencies]
+# Linear algebra
+nalgebra = "0.33"
+# faer added later for sparse solvers
+# Database
+rusqlite = { version = "0.32", features = ["bundled"] }
+# Serialization / bytes
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+byteorder = "1.5"
+bytemuck = "1.19"
+# Errors
+thiserror = "1"
+
+# Property tests (dev)
+proptest = "1.5"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1

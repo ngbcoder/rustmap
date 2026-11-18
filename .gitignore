@@ -1,0 +1,13 @@
+/target
+**/target
+# Cargo.lock is committed for reproducibility (binary crate present).
+*.pdb
+*.rs.bk
+.idea/
+.vscode/
+*.swp
+.DS_Store
+*.log
+# Golden data maybe large; keep under tests/golden but ignore generated
+tests/generated/
+# Keep design
