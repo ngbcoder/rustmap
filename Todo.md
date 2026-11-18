@@ -17,7 +17,7 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [x] M0.7 Add `LICENSE` (BSD-3-Clause, preserving upstream notice)
 - [x] M0.8 Add `README.md` with build instructions and attribution
 - [ ] M0.9 Configure `cargo deny` / dependency policy
-- [ ] M0.10 First commit & push
+- [x] M0.10 First commit & push
 
 ## M1 — Phase 0: Foundations (core + io)
 
@@ -123,19 +123,12 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [x] M1.12.2 `cargo test` all pass
 - [x] M1.12.3 `cargo clippy` clean
 - [x] M1.12.4 `cargo fmt` clean
-- [ ] M1.12.5 Commit & push
+- [x] M1.12.5 Commit & push
 
 ### M1.11 Golden-data harness
 - [ ] M1.11.1 Add `tests/` golden fixtures directory
 - [ ] M1.11.2 Generate a tiny upstream model/db with installed COLMAP
 - [ ] M1.11.3 Regression test loading it
-
-### M1.12 Phase 0 exit
-- [ ] M1.12.1 `cargo build` clean
-- [ ] M1.12.2 `cargo test` all pass
-- [ ] M1.12.3 `cargo clippy` clean
-- [ ] M1.12.4 `cargo fmt` clean
-- [ ] M1.12.5 Commit & push
 
 ## M2 — Phase 1: Geometry
 
