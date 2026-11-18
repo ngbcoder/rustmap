@@ -6,12 +6,15 @@ use std::path::Path;
 #[test]
 #[ignore]
 fn read_upstream_model() {
-    let p = std::env::var("UPSTREAM_MODEL").unwrap_or_else(|_| "/tmp/opencode/deckcol_sparse/0".to_string());
+    let p = std::env::var("UPSTREAM_MODEL")
+        .unwrap_or_else(|_| "/tmp/opencode/deckcol_sparse/0".to_string());
     let path = Path::new(&p);
-    if !path.exists() { return; }
+    if !path.exists() {
+        return;
+    }
     let mut rec = colmap_core::reconstruction::Reconstruction::default();
     model::read_model_text_dir(path, &mut rec).unwrap();
-    assert!(rec.cameras.len() > 0);
+    assert!(!rec.cameras.is_empty());
     // write back and read
     let tmp = tempfile::tempdir().unwrap();
     model::write_model_text_dir(tmp.path(), &rec).unwrap();

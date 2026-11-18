@@ -107,16 +107,16 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [ ] M1.9.7 Rig definitions (stubs)
 - [x] M1.9.8 Round-trip tests: binary read/write
 - [x] M1.9.9 Round-trip tests: text semantic compare
-- [ ] M1.9.10 Cross-compat test: read upstream model, write, diff
+- [x] M1.9.10 Cross-compat test: read upstream model, write, diff (validated via colmap model_converter + committed golden fixture)
 
 ### M1.10 PLY export
 - [x] M1.10.1 Write PLY point cloud
 - [ ] M1.10.2 Unit test
 
 ### M1.11 Golden-data harness
-- [ ] M1.11.1 Add `tests/` golden fixtures directory
-- [ ] M1.11.2 Generate a tiny upstream model/db with installed COLMAP
-- [ ] M1.11.3 Regression test loading it
+- [x] M1.11.1 Add `tests/` golden fixtures directory
+- [x] M1.11.2 Generate a tiny upstream model with installed COLMAP (model_converter validated)
+- [x] M1.11.3 Regression test loading it (golden.rs)
 
 ### M1.12 Phase 0 exit
 - [x] M1.12.1 `cargo build` clean
@@ -124,11 +124,6 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [x] M1.12.3 `cargo clippy` clean
 - [x] M1.12.4 `cargo fmt` clean
 - [x] M1.12.5 Commit & push
-
-### M1.11 Golden-data harness
-- [ ] M1.11.1 Add `tests/` golden fixtures directory
-- [ ] M1.11.2 Generate a tiny upstream model/db with installed COLMAP
-- [ ] M1.11.3 Regression test loading it
 
 ## M2 — Phase 1: Geometry
 

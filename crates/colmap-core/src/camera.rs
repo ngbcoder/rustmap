@@ -654,7 +654,6 @@ fn unproj_fov(p: &[f64], x: f64, y: f64) -> Option<Vector3<f64>> {
 
 // fisheye unproject: convert pixel to fisheye coords then NormalFromFisheye inverse?
 
-
 fn unproj_simple_fisheye(p: &[f64], x: f64, y: f64) -> Option<Vector3<f64>> {
     let f = p[0];
     let cx = p[1];
@@ -778,20 +777,32 @@ mod tests {
     use super::*;
     #[test]
     fn simple_pinhole_roundtrip() {
-        let cam = Camera::new(CameraModelKind::SimplePinhole, vec![100.0, 50.0, 60.0], 100, 100).unwrap();
+        let cam = Camera::new(
+            CameraModelKind::SimplePinhole,
+            vec![100.0, 50.0, 60.0],
+            100,
+            100,
+        )
+        .unwrap();
         let p = Vector3::new(0.3, -0.2, 2.0);
         let (x, y) = cam.project(&p).unwrap();
         let back = cam.unproject(x, y).unwrap();
-        assert!((back.x - p.x/p.z).abs() < 1e-9);
-        assert!((back.y - p.y/p.z).abs() < 1e-9);
+        assert!((back.x - p.x / p.z).abs() < 1e-9);
+        assert!((back.y - p.y / p.z).abs() < 1e-9);
     }
     #[test]
     fn opencv_roundtrip() {
-        let cam = Camera::new(CameraModelKind::OpenCv, vec![100.0,100.0,50.0,60.0,0.1,-0.05,0.01,-0.02], 100,100).unwrap();
+        let cam = Camera::new(
+            CameraModelKind::OpenCv,
+            vec![100.0, 100.0, 50.0, 60.0, 0.1, -0.05, 0.01, -0.02],
+            100,
+            100,
+        )
+        .unwrap();
         let p = Vector3::new(0.2, 0.1, 1.5);
-        let (x,y) = cam.project(&p).unwrap();
-        let back = cam.unproject(x,y).unwrap();
-        let orig = (p.x/p.z, p.y/p.z);
+        let (x, y) = cam.project(&p).unwrap();
+        let back = cam.unproject(x, y).unwrap();
+        let orig = (p.x / p.z, p.y / p.z);
         assert!((back.x - orig.0).abs() < 1e-6, "x {} vs {}", back.x, orig.0);
         assert!((back.y - orig.1).abs() < 1e-6);
     }
