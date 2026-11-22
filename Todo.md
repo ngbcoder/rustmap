@@ -62,7 +62,7 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [x] M1.4.13 Model enum discriminants matching COLMAP numeric IDs
 - [x] M1.4.14 `FromStr`/`Display` for model names
 - [x] M1.4.15 Project/unproject round-trip tests
-- [ ] M1.4.16 Jacobian finite-difference validation tests
+- [x] M1.4.16 Jacobian finite-difference validation tests (pinhole)
 
 ### M1.5 Core data model
 - [x] M1.5.1 `Point2D` (xy, optional `Point3DId`)
@@ -178,8 +178,8 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 
 ### M3.2 Residuals & Jacobians
 - [ ] M3.2.1 Reprojection residual per observation
-- [ ] M3.2.2 Analytic Jacobians per camera model
-- [ ] M3.2.3 Finite-difference validation tests
+- [~] M3.2.2 Analytic Jacobians per camera model (pinhole)
+- [x] M3.2.3 Finite-difference validation tests
 - [x] M3.2.4 Robust losses (Huber, Cauchy, soft-L1, Triggs)
 
 ### M3.3 LM solver

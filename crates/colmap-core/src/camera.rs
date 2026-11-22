@@ -205,6 +205,42 @@ impl Camera {
         }
     }
 
+    /// Jacobian of projection (x,y) w.r.t. 3D point in camera coordinates.
+    /// Returns [[dx/dX, dx/dY, dx/dZ], [dy/dX, dy/dY, dy/dZ]] or None.
+    pub fn jacobian_point(&self, p_cam: &Vector3<f64>) -> Option<[[f64; 3]; 2]> {
+        let p = self.params.as_slice();
+        match self.model {
+            CameraModelKind::SimplePinhole => {
+                if p_cam[2] <= 0.0 {
+                    return None;
+                }
+                let f = p[0];
+                let z = p_cam[2];
+                let x = p_cam[0];
+                let y = p_cam[1];
+                Some([
+                    [f / z, 0.0, -f * x / (z * z)],
+                    [0.0, f / z, -f * y / (z * z)],
+                ])
+            }
+            CameraModelKind::Pinhole => {
+                if p_cam[2] <= 0.0 {
+                    return None;
+                }
+                let fx = p[0];
+                let fy = p[1];
+                let z = p_cam[2];
+                let x = p_cam[0];
+                let y = p_cam[1];
+                Some([
+                    [fx / z, 0.0, -fx * x / (z * z)],
+                    [0.0, fy / z, -fy * y / (z * z)],
+                ])
+            }
+            _ => None,
+        }
+    }
+
     /// Unproject a pixel to a normalized camera ray (x, y, z) with z=1 for perspective.
     pub fn unproject(&self, x: f64, y: f64) -> Option<Vector3<f64>> {
         let p = self.params.as_slice();
@@ -820,5 +856,43 @@ mod tests {
         let orig = (p.x / p.z, p.y / p.z);
         assert!((back.x - orig.0).abs() < 1e-6, "x {} vs {}", back.x, orig.0);
         assert!((back.y - orig.1).abs() < 1e-6);
+    }
+
+    #[test]
+    fn jacobian_finite_diff() {
+        let cam = Camera::new(
+            CameraModelKind::Pinhole,
+            vec![100.0, 90.0, 50.0, 60.0],
+            100,
+            100,
+        )
+        .unwrap();
+        let p = nalgebra::Vector3::new(0.3, -0.2, 2.0);
+        let jac = cam.jacobian_point(&p).unwrap();
+        let eps = 1e-6;
+        for k in 0..3 {
+            let mut pp = p;
+            let mut pm = p;
+            pp[k] += eps;
+            pm[k] -= eps;
+            let (xp, yp) = cam.project(&pp).unwrap();
+            let (xm, ym) = cam.project(&pm).unwrap();
+            let dx = (xp - xm) / (2.0 * eps);
+            let dy = (yp - ym) / (2.0 * eps);
+            assert!(
+                (jac[0][k] - dx).abs() < 1e-4,
+                "dx k{}: {} vs {}",
+                k,
+                jac[0][k],
+                dx
+            );
+            assert!(
+                (jac[1][k] - dy).abs() < 1e-4,
+                "dy k{}: {} vs {}",
+                k,
+                jac[1][k],
+                dy
+            );
+        }
     }
 }
