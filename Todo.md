@@ -111,7 +111,7 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 
 ### M1.10 PLY export
 - [x] M1.10.1 Write PLY point cloud
-- [ ] M1.10.2 Unit test
+- [x] M1.10.2 Unit test
 
 ### M1.11 Golden-data harness
 - [x] M1.11.1 Add `tests/` golden fixtures directory
