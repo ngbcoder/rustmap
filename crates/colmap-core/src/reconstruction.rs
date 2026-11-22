@@ -57,6 +57,51 @@ impl Reconstruction {
         self.points3d.insert(id, pt);
     }
 
+    /// Link an image observation to a 3D point, maintaining the track.
+    pub fn add_observation(&mut self, image_id: ImageId, idx: usize, point3d_id: Point3DId) {
+        debug_assert!(self.images.contains_key(&image_id));
+        debug_assert!(self.points3d.contains_key(&point3d_id));
+        if let Some(img) = self.images.get_mut(&image_id) {
+            if idx < img.points2d.len() {
+                img.points2d[idx].point3d_id = Some(point3d_id);
+            }
+        }
+        if let Some(pt) = self.points3d.get_mut(&point3d_id) {
+            if !pt
+                .track
+                .iter()
+                .any(|(i, x)| *i == image_id && x.get() == idx as u32)
+            {
+                pt.track.push((image_id, Point2DIdx::new(idx as u32)));
+            }
+        }
+    }
+
+    /// Remove the link between an image observation and its 3D point.
+    pub fn remove_observation(&mut self, image_id: ImageId, idx: usize) {
+        let pid = self.images.get(&image_id).and_then(|img| {
+            if idx < img.points2d.len() {
+                img.points2d[idx].point3d_id
+            } else {
+                None
+            }
+        });
+        if let Some(img) = self.images.get_mut(&image_id) {
+            if idx < img.points2d.len() {
+                img.points2d[idx].point3d_id = None;
+            }
+        }
+        if let Some(pid) = pid {
+            if let Some(pt) = self.points3d.get_mut(&pid) {
+                pt.track
+                    .retain(|(i, x)| !(*i == image_id && x.get() == idx as u32));
+                if pt.track.is_empty() {
+                    self.points3d.remove(&pid);
+                }
+            }
+        }
+    }
+
     pub fn num_reg_images(&self) -> usize {
         self.images.len()
     }
@@ -139,4 +184,46 @@ fn _use_vec3() -> Vector3<f64> {
 #[allow(dead_code)]
 fn _use_point3() -> Point3 {
     Point3::zeros()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::camera::{Camera, CameraModelKind};
+    use crate::ids::{CameraId, ImageId, Point3DId};
+
+    #[test]
+    fn track_maintenance() {
+        let mut rec = Reconstruction::new();
+        let cam = Camera::new(CameraModelKind::Pinhole, vec![1.0, 1.0, 0.0, 0.0], 10, 10).unwrap();
+        rec.add_camera(CameraId::new(1), cam);
+        let mut img = Image {
+            image_id: ImageId::new(1),
+            name: "a.jpg".into(),
+            camera_id: CameraId::new(1),
+            pose: crate::geometry::Rigid3::identity(),
+            points2d: vec![Point2D {
+                xy: [0.0, 0.0],
+                point3d_id: None,
+            }],
+        };
+        rec.add_image(img);
+        rec.add_point3d(
+            Point3DId::new(1),
+            Point3D {
+                xyz: nalgebra::Vector3::zeros(),
+                color: [0, 0, 0],
+                error: 0.0,
+                track: Vec::new(),
+            },
+        );
+        rec.add_observation(ImageId::new(1), 0, Point3DId::new(1));
+        assert!(rec.validate().is_ok());
+        // point track contains obs
+        assert_eq!(rec.points3d.get(&Point3DId::new(1)).unwrap().track.len(), 1);
+        rec.remove_observation(ImageId::new(1), 0);
+        // point removed since track empty
+        assert!(!rec.points3d.contains_key(&Point3DId::new(1)));
+        assert!(rec.validate().is_ok());
+    }
 }

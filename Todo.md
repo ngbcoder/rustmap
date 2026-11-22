@@ -69,10 +69,10 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [x] M1.5.2 `Point3D` (xyz, color, error, track list)
 - [x] M1.5.3 `Image` (name, camera id, pose, points2d)
 - [x] M1.5.4 `Reconstruction` (maps + methods)
-- [x] M1.5.5 Invariant methods: add/remove observation, merge/split track (partial)
+- [x] M1.5.5 Invariant methods: add/remove observation, merge/split track
 - [x] M1.5.6 `validate()` consistency check
-- [ ] M1.5.7 `debug_assert!` invariants
-- [ ] M1.5.8 Unit tests for track maintenance
+- [x] M1.5.7 `debug_assert!` invariants
+- [x] M1.5.8 Unit tests for track maintenance
 
 ### M1.6 Error handling
 - [x] M1.6.1 `ColmapError` enum (thiserror)
