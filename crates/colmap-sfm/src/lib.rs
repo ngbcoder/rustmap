@@ -12,8 +12,6 @@ pub struct Mapper {
     pub reconstruction: Reconstruction,
 }
 
-
-
 impl Default for Mapper {
     fn default() -> Self {
         Self::new()

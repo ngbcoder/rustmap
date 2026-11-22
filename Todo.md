@@ -180,7 +180,7 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [ ] M3.2.1 Reprojection residual per observation
 - [ ] M3.2.2 Analytic Jacobians per camera model
 - [ ] M3.2.3 Finite-difference validation tests
-- [ ] M3.2.4 Robust losses (Huber, Cauchy, soft-L1, Triggs)
+- [x] M3.2.4 Robust losses (Huber, Cauchy, soft-L1, Triggs)
 
 ### M3.3 LM solver
 - [x] M3.3.1 Levenberg-Marquardt with trust region (dense, finite-diff)
