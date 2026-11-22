@@ -183,7 +183,7 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [ ] M3.2.4 Robust losses (Huber, Cauchy, soft-L1, Triggs)
 
 ### M3.3 LM solver
-- [ ] M3.3.1 Levenberg-Marquardt with trust region
+- [~] M3.3.1 Levenberg-Marquardt with trust region (dense, finite-diff)
 - [ ] M3.3.2 Schur complement elimination of points
 - [ ] M3.3.3 Sparse Cholesky via faer
 - [ ] M3.3.4 Preconditioned CG option
