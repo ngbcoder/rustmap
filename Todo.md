@@ -276,7 +276,7 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [ ] M8.1 Rotation averaging (robust L1 + IRLS)
 - [ ] M8.2 Global positioning (GLOMAP-style)
 - [ ] M8.3 Global BA + filtering
-- [ ] M8.4 CLI (`colmap-rs` with subcommands + aliases)
+- [~] M8.4 CLI (`colmap-rs` with subcommands + aliases) (skeleton)
 - [ ] M8.5 TOML project file support
 - [ ] M8.6 Rerun visualization (optional)
 - [ ] M8.7 `egui` viewer (phase 2 GUI)

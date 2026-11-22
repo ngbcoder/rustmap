@@ -130,6 +130,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "colmap-cli"
+version = "0.1.0"
+
+[[package]]
 name = "colmap-core"
 version = "0.1.0"
 dependencies = [

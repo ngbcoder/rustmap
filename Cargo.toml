@@ -6,6 +6,7 @@ members = [
     "crates/colmap-geometry",
     "crates/colmap-optim",
     "crates/colmap-sfm",
+    "crates/colmap-cli",
     "crates/colmap-matching",
     "crates/colmap-features",
 ]
