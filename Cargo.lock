@@ -170,6 +170,7 @@ dependencies = [
 name = "colmap-optim"
 version = "0.1.0"
 dependencies = [
+ "colmap-core",
  "nalgebra",
  "proptest",
 ]

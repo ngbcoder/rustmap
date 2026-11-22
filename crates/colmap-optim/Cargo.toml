@@ -8,6 +8,7 @@ authors.workspace = true
 repository.workspace = true
 
 [dependencies]
+colmap-core = { path = "../colmap-core" }
 nalgebra = { workspace = true }
 
 [dev-dependencies]
