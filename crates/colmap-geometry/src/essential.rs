@@ -42,6 +42,29 @@ pub fn decompose_essential(e: &Matrix3<f64>) -> Vec<(Matrix3<f64>, Vector3<f64>)
 }
 
 /// Cheirality check: count points with positive depth in both views.
+
+/// Recover the best relative pose (world->cam2 given cam1 at origin) from E
+/// by cheirality. Returns (R, t) for camera2 relative to camera1.
+pub fn relative_pose_from_essential(
+    e: &Matrix3<f64>,
+    pts1: &[[f64; 2]],
+    pts2: &[[f64; 2]],
+    k1: &Matrix3<f64>,
+    k2: &Matrix3<f64>,
+) -> Option<(Matrix3<f64>, Vector3<f64>)> {
+    let cands = decompose_essential(e);
+    let mut best: Option<(Matrix3<f64>, Vector3<f64>, usize)> = None;
+    for (r, t) in cands {
+        let c = count_cheiral(&r, &t, pts1, pts2, k1, k2);
+        match &best {
+            None => best = Some((r, t, c)),
+            Some((_, _, bc)) if c > *bc => best = Some((r, t, c)),
+            _ => {}
+        }
+    }
+    best.map(|(r, t, _)| (r, t))
+}
+
 pub fn count_cheiral(
     r: &Matrix3<f64>,
     t: &Vector3<f64>,

@@ -144,7 +144,7 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [ ] M2.2.5 P3P absolute pose
 - [ ] M2.2.6 EPnP
 - [x] M2.2.7 DLT triangulation
-- [ ] M2.2.8 Relative-pose decomposition + cheirality
+- [x] M2.2.8 Relative-pose decomposition + cheirality
 - [ ] M2.2.9 Unit tests per solver
 
 ### M2.3 Triangulation
