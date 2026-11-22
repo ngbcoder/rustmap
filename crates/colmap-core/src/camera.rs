@@ -3,6 +3,8 @@
 use crate::error::{ColmapError, Result};
 use nalgebra::Vector3;
 use serde::{Deserialize, Serialize};
+use std::fmt;
+use std::str::FromStr;
 
 /// Camera model kind, with numeric ids matching COLMAP `CameraModelId`.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -770,6 +772,19 @@ fn unproj_thin_prism_fisheye(p: &[f64], x: f64, y: f64) -> Option<Vector3<f64>> 
 #[allow(dead_code)]
 fn _has_depth(w: f64) -> bool {
     has_depth(w)
+}
+
+impl fmt::Display for CameraModelKind {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.name())
+    }
+}
+
+impl FromStr for CameraModelKind {
+    type Err = String;
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        Self::from_name(s).ok_or_else(|| format!("unknown camera model: {}", s))
+    }
 }
 
 #[cfg(test)]

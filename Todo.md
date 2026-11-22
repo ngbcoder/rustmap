@@ -41,7 +41,7 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 ### M1.3 Scalar/geometry primitives
 - [x] M1.3.1 `Rigid3` (rotation quaternion + translation) with inverse/compose
 - [x] M1.3.2 `Sim3` (scale + rotation + translation)
-- [ ] M1.3.3 `Pose` aliasing and conversions
+- [x] M1.3.3 `Pose` aliasing and conversions (alias)
 - [x] M1.3.4 Vector/point type aliases (Point2, Point3)
 - [x] M1.3.5 Angle helpers, degree/radian conversions
 - [x] M1.3.6 Unit tests (composition associativity, inverse)
@@ -60,7 +60,7 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [x] M1.4.11 `RADIAL_FISHEYE`
 - [x] M1.4.12 `THIN_PRISM_FISHEYE`
 - [x] M1.4.13 Model enum discriminants matching COLMAP numeric IDs
-- [ ] M1.4.14 `FromStr`/`Display` for model names (from_name exists; Display not)
+- [x] M1.4.14 `FromStr`/`Display` for model names
 - [x] M1.4.15 Project/unproject round-trip tests
 - [ ] M1.4.16 Jacobian finite-difference validation tests
 

@@ -38,6 +38,8 @@ impl Rigid3 {
     }
 }
 
+pub type Pose = Rigid3;
+
 impl Default for Rigid3 {
     fn default() -> Self {
         Self::identity()
