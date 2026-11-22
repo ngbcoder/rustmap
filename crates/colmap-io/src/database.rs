@@ -14,6 +14,12 @@ pub struct Database {
 impl Database {
     pub fn open(path: &Path) -> Result<Self> {
         let conn = Connection::open(path).map_err(IoError::Sqlite)?;
+        let ver: i64 = conn
+            .query_row("PRAGMA user_version", [], |r| r.get(0))
+            .unwrap_or(0);
+        if ver != 0 && ver != 4030001 {
+            return Err(IoError::Invalid(format!("unsupported db version {}", ver)));
+        }
         Ok(Self { conn })
     }
 
@@ -29,12 +35,25 @@ impl Database {
     fn create_tables(&self) -> Result<()> {
         self.conn.execute_batch(
             "CREATE TABLE cameras (camera_id INTEGER NOT NULL, model INTEGER NOT NULL, width INTEGER NOT NULL, height INTEGER NOT NULL, params BLOB, source INTEGER NOT NULL, PRIMARY KEY(camera_id, source));
-             CREATE TABLE images (image_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL UNIQUE, camera_id INTEGER NOT NULL);
+             CREATE TABLE images (image_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL UNIQUE, camera_id INTEGER NOT NULL, CONSTRAINT image_id_check CHECK(image_id >= 0 and image_id < 2147483647));
+             CREATE UNIQUE INDEX index_name ON images(name);
              CREATE TABLE keypoints (image_id INTEGER PRIMARY KEY NOT NULL, rows INTEGER NOT NULL, cols INTEGER NOT NULL, data BLOB, FOREIGN KEY(image_id) REFERENCES images(image_id) ON DELETE CASCADE);
              CREATE TABLE descriptors (image_id INTEGER PRIMARY KEY NOT NULL, type INTEGER NOT NULL, rows INTEGER NOT NULL, cols INTEGER NOT NULL, data BLOB, FOREIGN KEY(image_id) REFERENCES images(image_id) ON DELETE CASCADE);
              CREATE TABLE matches (pair_id INTEGER PRIMARY KEY NOT NULL, rows INTEGER NOT NULL, cols INTEGER NOT NULL, data BLOB);
-             CREATE TABLE two_view_geometries (pair_id INTEGER PRIMARY KEY NOT NULL, rows INTEGER NOT NULL, cols INTEGER NOT NULL, data BLOB, config INTEGER NOT NULL, F BLOB, E BLOB, H BLOB, qvec BLOB, tvec BLOB, camera1 BLOB, camera2 BLOB);"
+             CREATE TABLE two_view_geometries (pair_id INTEGER PRIMARY KEY NOT NULL, rows INTEGER NOT NULL, cols INTEGER NOT NULL, data BLOB, config INTEGER NOT NULL, F BLOB, E BLOB, H BLOB, qvec BLOB, tvec BLOB, camera1 BLOB, camera2 BLOB);
+             CREATE TABLE pose_priors (pose_prior_id INTEGER PRIMARY KEY NOT NULL, corr_data_id INTEGER NOT NULL, corr_sensor_id INTEGER NOT NULL, corr_sensor_type INTEGER NOT NULL, position BLOB, position_covariance BLOB, gravity BLOB, coordinate_system INTEGER NOT NULL);
+             CREATE UNIQUE INDEX pose_prior_data_assignment ON pose_priors(corr_data_id, corr_sensor_id, corr_sensor_type);
+             CREATE TABLE rigs (rig_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ref_sensor_id INTEGER NOT NULL, ref_sensor_type INTEGER NOT NULL);
+             CREATE UNIQUE INDEX rig_ref_sensor_assignment ON rigs(ref_sensor_id, ref_sensor_type);
+             CREATE TABLE rig_sensors (rig_id INTEGER NOT NULL, sensor_id INTEGER NOT NULL, sensor_type INTEGER NOT NULL, sensor_from_rig BLOB, FOREIGN KEY(rig_id) REFERENCES rigs(rig_id) ON DELETE CASCADE);
+             CREATE UNIQUE INDEX rig_sensor_assignment ON rig_sensors(sensor_id, sensor_type);
+             CREATE TABLE frames (frame_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, rig_id INTEGER NOT NULL, FOREIGN KEY(rig_id) REFERENCES rigs(rig_id) ON DELETE CASCADE);
+             CREATE TABLE frame_data (frame_id INTEGER NOT NULL, data_id INTEGER NOT NULL, sensor_id INTEGER NOT NULL, sensor_type INTEGER NOT NULL, FOREIGN KEY(frame_id) REFERENCES frames(frame_id) ON DELETE CASCADE);
+             CREATE UNIQUE INDEX frame_sensor_assignment ON frame_data(data_id, sensor_type);"
         ).map_err(IoError::Sqlite)?;
+        self.conn
+            .execute("PRAGMA user_version = 4030001", [])
+            .map_err(IoError::Sqlite)?;
         Ok(())
     }
 

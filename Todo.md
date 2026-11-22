@@ -92,9 +92,9 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [x] M1.8.5 `descriptors` table read/write (blob format)
 - [x] M1.8.6 `matches` table read/write
 - [x] M1.8.7 `two_view_geometries` table read/write
-- [ ] M1.8.8 `pose_priors` table read/write
-- [ ] M1.8.9 `rigs`/`frames` tables (stubs)
-- [ ] M1.8.10 Schema version validation
+- [~] M1.8.8 `pose_priors` table read/write (schema created)
+- [~] M1.8.9 `rigs`/`frames` tables (schema created)
+- [x] M1.8.10 Schema version validation
 - [ ] M1.8.11 Unit tests: create db, insert, read back
 
 ### M1.9 Model files (text + binary)
