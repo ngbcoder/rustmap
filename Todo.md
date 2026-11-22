@@ -202,7 +202,7 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 ## M4 — Phase 3: Features & matching
 
 ### M4.1 `colmap-features`
-- [ ] M4.1.1 Crate skeleton
+- [x] M4.1.1 Crate skeleton
 - [ ] M4.1.2 SIFT: Gaussian scale space
 - [ ] M4.1.3 DoG extrema
 - [ ] M4.1.4 Sub-pixel refinement
@@ -214,20 +214,20 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [ ] M4.1.10 EXIF focal length extraction
 - [ ] M4.1.11 Max image size downscaling
 - [ ] M4.1.12 single_camera / per_folder handling
-- [ ] M4.1.13 `FeatureExtractor` trait
+- [x] M4.1.13 `FeatureExtractor` trait
 - [ ] M4.1.14 CPU rayon backend
 - [ ] M4.1.15 wgpu kernels (later)
 
 ### M4.2 `colmap-matching`
-- [ ] M4.2.1 Crate skeleton
-- [ ] M4.2.2 `PairGenerator` trait
+- [x] M4.2.1 Crate skeleton
+- [x] M4.2.2 `PairGenerator` trait
 - [ ] M4.2.3 Exhaustive pair generator
 - [ ] M4.2.4 Sequential (overlap + loop detection)
 - [ ] M4.2.5 Vocab-tree retrieval
 - [ ] M4.2.6 Spatial (GPS)
 - [ ] M4.2.7 Transitive
 - [ ] M4.2.8 Custom pair list
-- [ ] M4.2.9 `Matcher` trait
+- [x] M4.2.9 `Matcher` trait
 - [ ] M4.2.10 Brute-force + ratio test + cross-check
 - [ ] M4.2.11 Guided matching
 - [ ] M4.2.12 Vocab tree port (load .bin)
@@ -235,7 +235,7 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 
 ## M5 — Phase 4: Incremental mapper
 
-- [ ] M5.1 `colmap-sfm` crate skeleton
+- [x] M5.1 `colmap-sfm` crate skeleton
 - [ ] M5.2 Correspondence graph
 - [ ] M5.3 Initial pair selection
 - [ ] M5.4 Triangulate initial structure + global BA

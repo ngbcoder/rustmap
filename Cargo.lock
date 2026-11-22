@@ -141,6 +141,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "colmap-features"
+version = "0.1.0"
+dependencies = [
+ "proptest",
+]
+
+[[package]]
 name = "colmap-geometry"
 version = "0.1.0"
 dependencies = [
@@ -167,7 +174,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "colmap-matching"
+version = "0.1.0"
+dependencies = [
+ "proptest",
+]
+
+[[package]]
 name = "colmap-optim"
+version = "0.1.0"
+dependencies = [
+ "colmap-core",
+ "nalgebra",
+ "proptest",
+]
+
+[[package]]
+name = "colmap-sfm"
 version = "0.1.0"
 dependencies = [
  "colmap-core",

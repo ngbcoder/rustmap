@@ -5,6 +5,9 @@ members = [
     "crates/colmap-io",
     "crates/colmap-geometry",
     "crates/colmap-optim",
+    "crates/colmap-sfm",
+    "crates/colmap-matching",
+    "crates/colmap-features",
 ]
 
 [workspace.package]
