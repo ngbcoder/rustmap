@@ -1,0 +1,18 @@
+[package]
+name = "colmap-geometry"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[dependencies]
+colmap-core = { path = "../colmap-core" }
+nalgebra = { workspace = true }
+thiserror = { workspace = true }
+rand = { workspace = true }
+rand_chacha = { workspace = true }
+
+[dev-dependencies]
+proptest = { workspace = true }

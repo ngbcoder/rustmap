@@ -3,6 +3,7 @@ resolver = "2"
 members = [
     "crates/colmap-core",
     "crates/colmap-io",
+    "crates/colmap-geometry",
 ]
 
 [workspace.package]
@@ -26,6 +27,9 @@ byteorder = "1.5"
 bytemuck = "1.19"
 # Errors
 thiserror = "1"
+# RNG
+rand = "0.8"
+rand_chacha = "0.3"
 
 # Property tests (dev)
 proptest = "1.5"

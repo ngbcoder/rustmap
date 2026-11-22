@@ -128,12 +128,12 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 ## M2 — Phase 1: Geometry
 
 ### M2.1 RANSAC framework
-- [ ] M2.1.1 Generic `Estimator` trait
+- [x] M2.1.1 Generic `Estimator` trait
 - [ ] M2.1.2 `SupportMeasurer` (inlier count + residual sum)
 - [ ] M2.1.3 MSAC variant
 - [ ] M2.1.4 LO-RANSAC local optimization
 - [ ] M2.1.5 Adaptive iteration count
-- [ ] M2.1.6 Seeded RNG (rand_pcg) threading
+- [x] M2.1.6 Seeded RNG (rand_pcg) threading
 - [ ] M2.1.7 Unit tests: known inlier sets
 
 ### M2.2 Minimal solvers
@@ -143,12 +143,12 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [ ] M2.2.4 4-point homography
 - [ ] M2.2.5 P3P absolute pose
 - [ ] M2.2.6 EPnP
-- [ ] M2.2.7 DLT triangulation
+- [x] M2.2.7 DLT triangulation
 - [ ] M2.2.8 Relative-pose decomposition + cheirality
 - [ ] M2.2.9 Unit tests per solver
 
 ### M2.3 Triangulation
-- [ ] M2.3.1 Midpoint / DLT triangulation
+- [x] M2.3.1 Midpoint / DLT triangulation
 - [ ] M2.3.2 Track triangulation from multiple views
 - [ ] M2.3.3 Reprojection error computation
 - [ ] M2.3.4 Unit tests
@@ -164,8 +164,8 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [ ] M2.5.3 Tests on pairs
 
 ### M2.6 `colmap-geometry` crate
-- [ ] M2.6.1 Create crate
-- [ ] M2.6.2 Wire into workspace
+- [x] M2.6.1 Create crate
+- [x] M2.6.2 Wire into workspace
 - [ ] M2.6.3 Benchmarks
 
 ## M3 — Phase 2: Optimization (BA)
