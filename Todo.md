@@ -139,8 +139,8 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 ### M2.2 Minimal solvers
 - [ ] M2.2.1 5-point essential
 - [ ] M2.2.2 7-point fundamental
-- [ ] M2.2.3 8-point fundamental
-- [ ] M2.2.4 4-point homography
+- [x] M2.2.3 8-point fundamental
+- [x] M2.2.4 4-point homography
 - [ ] M2.2.5 P3P absolute pose
 - [ ] M2.2.6 EPnP
 - [x] M2.2.7 DLT triangulation
@@ -154,12 +154,12 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [ ] M2.3.4 Unit tests
 
 ### M2.4 PnP
-- [ ] M2.4.1 PnP RANSAC wrapper
+- [x] M2.4.1 PnP RANSAC wrapper (DLT-based)
 - [ ] M2.4.2 Pose refinement (nonlinear)
 - [ ] M2.4.3 Unit tests
 
 ### M2.5 Two-view geometry
-- [ ] M2.5.1 Classifier (calibrated/uncalibrated/planar/panoramic/watermark)
+- [~] M2.5.1 Classifier (basic)
 - [ ] M2.5.2 Database output parity
 - [ ] M2.5.3 Tests on pairs
 

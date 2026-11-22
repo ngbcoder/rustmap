@@ -73,9 +73,17 @@ pub fn fundamental_8point(pts1: &[[f64; 2]], pts2: &[[f64; 2]]) -> Option<Matrix
         a[(i, 8)] = 1.0;
     }
     // SVD of A; solution is last row of V^T (smallest singular value)
-    let svd = a.svd(false, true);
-    let vt = svd.v_t?;
-    let f_vec = vt.row(vt.nrows() - 1);
+    let ata = a.transpose() * &a;
+    let eig = ata.symmetric_eigen();
+    let mut idx = 0usize;
+    let mut minval = eig.eigenvalues[0];
+    for i in 1..9 {
+        if eig.eigenvalues[i] < minval {
+            minval = eig.eigenvalues[i];
+            idx = i;
+        }
+    }
+    let f_vec = eig.eigenvectors.column(idx);
     let mut f = Matrix3::zeros();
     for i in 0..3 {
         for j in 0..3 {

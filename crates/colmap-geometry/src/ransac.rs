@@ -56,7 +56,7 @@ pub fn ransac<D, E: Estimator<D>>(
     let mut rng = ChaCha8Rng::seed_from_u64(opts.seed);
 
     let mut best_model: Option<E::Model> = None;
-    let mut best_score: usize = opts.min_inliers;
+    let mut best_score: usize = opts.min_inliers.saturating_sub(1);
     let mut best_rsum: f64 = f64::INFINITY;
 
     let mut iters = opts.max_iterations;
