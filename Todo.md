@@ -95,7 +95,7 @@ Legend: `[ ]` pending, `[~]` in progress, `[x]` done, `[-]` skipped/not applicab
 - [~] M1.8.8 `pose_priors` table read/write (schema created)
 - [~] M1.8.9 `rigs`/`frames` tables (schema created)
 - [x] M1.8.10 Schema version validation
-- [ ] M1.8.11 Unit tests: create db, insert, read back
+- [x] M1.8.11 Unit tests: create db, insert, read back
 
 ### M1.9 Model files (text + binary)
 - [x] M1.9.1 Binary reader/writer for cameras
